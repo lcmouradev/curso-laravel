@@ -1,0 +1,55 @@
+services:
+    # image project
+    curso-laravel:
+        container_name: curso-laravel
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/
+        ports:
+            - 8081:8000
+        volumes:
+            - ./:/var/www
+        networks:
+            - laravel
+
+    # db postgres
+    postgres:
+        image: postgres:15.3-alpine
+        container_name: postgres-curso-laravel
+        restart: always
+        environment:
+            POSTGRES_DB: curso-laravel
+            POSTGRES_USER: dev
+            POSTGRES_PASSWORD: root
+        ports:
+            - 5433:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        networks:
+            - laravel
+
+    # pgadmin
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin-curso-laravel
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "curso-laravel@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "root"
+        ports:
+            - "16543:80"
+        depends_on:
+            - postgres
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
+
+volumes:
+    pgdata:
+    pgadmin:
