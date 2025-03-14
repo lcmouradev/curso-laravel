@@ -1,7 +1,7 @@
 all:
 	@echo "make dcu - Iniciando containers"
 	@echo "make dcd - Derrubando containers"
-	@echo "make deb - Acessando o container EADS"
+	@echo "make deb - Acessando o container curso-laravel"
 	@echo "make serv - Iniciando servidor"
 
 dcu:
