@@ -12,10 +12,12 @@
     <tbody>
         @foreach ($supports as $support)
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ $support->subject }}</td>
+            <td>{{ $support->status }}</td>
+            <td>{{ $support->body }}</td>
+            <td>
+                >
+            </td>
         </tr>
         @endforeach
     </tbody>
